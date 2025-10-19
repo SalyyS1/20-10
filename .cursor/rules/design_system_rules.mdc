@@ -1,0 +1,285 @@
+# Design System Rules for 20/10 Gift Website
+
+## Overview
+This is a React + TypeScript website built with Vite, using Tailwind CSS for styling and Material-UI for components. The design system follows a pastel color scheme with romantic, feminine aesthetics for a Vietnamese Women's Day gift website.
+
+## Design Tokens
+
+### Colors
+```css
+/* Primary Colors - Pastel Pink/Purple Theme */
+--primary-pink: #fce4ec
+--primary-purple: #e1bee7
+--primary-blue: #c8e6f5
+--background: #fff5f8
+--accent-pink: #f8bbd9
+--accent-purple: #ce93d8
+--accent-blue: #a8d8ea
+
+/* Gradients */
+--gradient-pink: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)
+--gradient-purple: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%)
+--gradient-blue: linear-gradient(135deg, #c8e6f5 0%, #a8d8ea 100%)
+--gradient-main: linear-gradient(135deg, #fce4ec 0%, #fff5f8 50%, #c8e6f5 100%)
+```
+
+### Typography
+```css
+/* Font Families */
+--font-primary: 'Poppins', sans-serif
+--font-display: 'Dancing Script', cursive
+
+/* Font Sizes */
+--text-xs: 0.75rem
+--text-sm: 0.875rem
+--text-base: 1rem
+--text-lg: 1.125rem
+--text-xl: 1.25rem
+--text-2xl: 1.5rem
+--text-3xl: 1.875rem
+--text-4xl: 2.25rem
+--text-5xl: 3rem
+--text-6xl: 3.75rem
+--text-7xl: 4.5rem
+```
+
+### Spacing
+```css
+/* Spacing Scale */
+--space-1: 0.25rem
+--space-2: 0.5rem
+--space-3: 0.75rem
+--space-4: 1rem
+--space-6: 1.5rem
+--space-8: 2rem
+--space-12: 3rem
+--space-16: 4rem
+--space-20: 5rem
+--space-24: 6rem
+```
+
+## Component Architecture
+
+### File Structure
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Allay.tsx       # Interactive Allay character
+│   ├── GiftBox.tsx     # Gift box selection component
+│   └── BookPage.tsx    # Book page component
+├── pages/              # Page components
+│   ├── LandingPage.tsx # Landing page
+│   ├── GiftPage.tsx    # Gift selection page
+│   └── BookPage.tsx    # Book reading page
+└── styles/             # Global styles
+    ├── globals.css     # Global styles and utilities
+    └── book.css        # Book-specific styles
+```
+
+### Component Patterns
+
+#### 1. Motion Components
+All interactive components use Framer Motion for animations:
+```tsx
+import { motion, AnimatePresence } from 'framer-motion'
+
+const Component = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    Content
+  </motion.div>
+)
+```
+
+#### 2. Responsive Design
+Components use Tailwind responsive classes:
+```tsx
+<div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+  Content
+</div>
+```
+
+#### 3. Data Attributes for Testing
+All interactive elements include data-testid:
+```tsx
+<button data-testid="gift-button" onClick={handleClick}>
+  Click me
+</button>
+```
+
+## Styling Approach
+
+### Tailwind CSS Configuration
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        // ... other colors
+      },
+      fontFamily: {
+        'dancing': ['Dancing Script', 'cursive'],
+        'poppins': ['Poppins', 'sans-serif'],
+      },
+      animation: {
+        'fade-in': 'fade-in 0.6s ease-out',
+        'float': 'float 3s ease-in-out infinite',
+        'sparkle': 'sparkle 1.5s ease-in-out infinite',
+      }
+    }
+  }
+}
+```
+
+### Custom CSS Classes
+```css
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Gradient backgrounds */
+.gradient-pink {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+}
+```
+
+## Animation Guidelines
+
+### 1. Entrance Animations
+- Use `fade-in` for page transitions
+- Use `slide-in` for side elements
+- Duration: 0.5-0.8s for smooth feel
+
+### 2. Hover Effects
+- Scale: 1.05-1.1 for buttons
+- Rotate: ±5-10 degrees for decorative elements
+- Duration: 0.3s for responsive feel
+
+### 3. Continuous Animations
+- `float`: For floating elements (3s duration)
+- `sparkle`: For sparkle effects (1.5s duration)
+- `bounce-gentle`: For gentle bouncing (2s duration)
+
+## Responsive Breakpoints
+
+```css
+/* Mobile First Approach */
+/* Base: 320px+ */
+/* sm: 640px+ */
+/* md: 768px+ */
+/* lg: 1024px+ */
+/* xl: 1280px+ */
+/* 2xl: 1536px+ */
+```
+
+### Mobile Optimizations
+- Touch targets: minimum 44px
+- Font sizes: readable on small screens
+- Full-screen modals on mobile
+- Stacked layouts for gift boxes
+
+## Asset Management
+
+### Image Assets
+- Store in `src/assets/` directory
+- Use WebP format when possible
+- Optimize for web (compress, resize)
+- Lazy load for performance
+
+### Icon System
+- Use Lucide React icons
+- Consistent sizing: 16px, 20px, 24px
+- Color: inherit from parent or use theme colors
+
+## Accessibility Guidelines
+
+### 1. Color Contrast
+- Ensure sufficient contrast ratios
+- Don't rely solely on color for information
+- Test with color blindness simulators
+
+### 2. Keyboard Navigation
+- All interactive elements focusable
+- Logical tab order
+- Visible focus indicators
+
+### 3. Screen Readers
+- Proper ARIA labels
+- Semantic HTML structure
+- Alt text for images
+
+## Performance Guidelines
+
+### 1. Code Splitting
+- Lazy load page components
+- Split vendor bundles
+- Use dynamic imports
+
+### 2. Image Optimization
+- Use appropriate formats
+- Implement lazy loading
+- Provide fallbacks
+
+### 3. Animation Performance
+- Use transform and opacity for animations
+- Avoid animating layout properties
+- Use will-change sparingly
+
+## Testing Integration
+
+### Playwright Test Attributes
+```tsx
+// All interactive elements need data-testid
+<button data-testid="gift-button">Click me</button>
+<div data-testid="allay">Allay component</div>
+<input data-testid="password-input" />
+```
+
+### Test Scenarios
+1. Full user flow testing
+2. Mobile responsiveness
+3. API error handling
+4. Password validation
+5. Form submissions
+
+## Deployment Considerations
+
+### GitHub Pages
+- Static build output
+- No server-side rendering
+- API calls through GitHub Actions proxy
+- Environment variables in GitHub Secrets
+
+### Build Optimization
+- Minify CSS and JS
+- Optimize images
+- Enable gzip compression
+- Use CDN for assets
+
+## Figma Integration
+
+### Design Tokens
+- Export colors as CSS variables
+- Use consistent naming conventions
+- Maintain design system documentation
+
+### Component Mapping
+- Map Figma components to React components
+- Maintain visual consistency
+- Document component props and variants
+
+### Asset Export
+- Export images at 2x resolution
+- Use SVG for icons when possible
+- Optimize file sizes
