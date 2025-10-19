@@ -1,73 +1,15 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc mừng ngày 20/10 - Món quà đặc biệt</title>
-    <style>
-        body {
-            background: linear-gradient(135deg, #f472b6, #a855f7);
-            color: white;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            padding: 50px;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        .button {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .button:hover {
-            background: white;
-            color: #f472b6;
-            transform: scale(1.05);
-        }
-        .emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
-    </style>
-</head>
-<body>
-    <div class="emoji">🎁</div>
-    <h1>Chúc mừng ngày Phụ Nữ Việt Nam!</h1>
-    <p>Anh có một món quà đặc biệt dành cho em</p>
-    <a href="/gift" class="button">Xem món quà đặc biệt này nhé</a>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>20/10 Gift App</title>
+    <script type="module" crossorigin src="./assets/index-bc88af25.js"></script>
+    <link rel="stylesheet" href="./assets/index-c35ebb0d.css">
+  </head>
+  <body>
+    <div id="root"></div>
     
-    <script>
-        // Simple navigation
-        document.querySelector('.button').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Trang web đang được cấu hình. Vui lòng đợi thêm chút nữa! 💖');
-        });
-    </script>
-</body>
+  </body>
 </html>
