@@ -1,0 +1,56 @@
+name: GitHub Issue Proxy
+
+on:
+  repository_dispatch:
+    types: [create_issue, update_progress]
+
+jobs:
+  create-issue:
+    if: github.event.action == 'create_issue'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issue
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"title\": \"Gift Selection - ${{ github.event.client_payload.timestamp }}\", \"body\": \"**Box Number:** ${{ github.event.client_payload.boxNumber }}\n\n**Name:** ${{ github.event.client_payload.name }}\n\n**Phone:** ${{ github.event.client_payload.phone }}\n\n**Address:** ${{ github.event.client_payload.address }}\n\n**Timestamp:** ${{ github.event.client_payload.timestamp }}\"}" \
+            https://api.github.com/repos/${{ github.repository }}/issues
+
+  update-progress:
+    if: github.event.action == 'update_progress'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Update progress.json
+        run: |
+          # Create or update progress.json
+          echo '${{ github.event.client_payload.progressData }}' > progress.json
+
+          # Get current SHA if file exists
+          SHA=$(curl -s -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/contents/progress.json" | \
+            jq -r '.sha // empty')
+
+          # Prepare commit data
+          CONTENT=$(base64 -w 0 progress.json)
+
+          if [ -n "$SHA" ]; then
+            # Update existing file
+            curl -X PUT \
+              -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d "{\"message\": \"Update progress\", \"content\": \"$CONTENT\", \"sha\": \"$SHA\"}" \
+              https://api.github.com/repos/${{ github.repository }}/contents/progress.json
+          else
+            # Create new file
+            curl -X PUT \
+              -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d "{\"message\": \"Create progress file\", \"content\": \"$CONTENT\"}" \
+              https://api.github.com/repos/${{ github.repository }}/contents/progress.json
+          fi
