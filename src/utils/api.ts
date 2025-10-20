@@ -23,13 +23,32 @@ export const api = {
     try {
       const deviceId = getOrCreateDeviceId()
       
-      await addDoc(collection(db, 'giftSubmissions'), {
+      // Clean undefined values for Firestore
+      const cleanData: any = {
         deviceId,
-        ...data,
+        boxNumber: data.boxNumber,
+        name: data.name,
+        phone: data.phone,
+        address: data.address,
+        dob: data.dob,
+        timestamp: data.timestamp,
         submittedAt: serverTimestamp(),
-      })
+      }
 
-      console.log('✅ Gift selection saved to Firebase:', data)
+      // Only add optional fields if they exist and are not undefined
+      if (data.giftType !== undefined && data.giftType !== '') {
+        cleanData.giftType = data.giftType
+      }
+      if (data.favoriteGenre !== undefined && data.favoriteGenre !== '') {
+        cleanData.favoriteGenre = data.favoriteGenre
+      }
+      if (data.note !== undefined && data.note !== '') {
+        cleanData.note = data.note
+      }
+      
+      await addDoc(collection(db, 'giftSubmissions'), cleanData)
+
+      console.log('✅ Gift selection saved to Firebase:', cleanData)
       return {
         success: true,
         message: 'Gift selection submitted successfully!'
