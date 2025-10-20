@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vitejs.dev/config/
+// vite.config.ts
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,9 +11,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: '/20-10/',
+  base: '/', // trước đây là '/20-10/'
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
   }
 })
+
