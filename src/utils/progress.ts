@@ -25,7 +25,7 @@ export interface GiftSubmission {
 const PROGRESS_COLLECTION = 'calendar_progress'
 const GIFTS_COLLECTION = 'gift_submissions'
 
-function getOrCreateDeviceId(): string {
+export function getOrCreateDeviceId(): string {
   const key = 'calendar_device_id'
   // Use cookie (not localStorage) per user's preference
   const m = document.cookie.match(new RegExp('(?:^|; )' + key + '=([^;]*)'))
