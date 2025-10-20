@@ -1,9 +1,9 @@
-// API utilities for GitHub integration
-// This file handles API calls to GitHub through proxy endpoints
+// API utilities for Firebase integration
+// This file handles API calls to Firebase Firestore
 
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://api.github.com'
-  : '/api'
+import { db } from './firebase'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { getOrCreateDeviceId } from './progress'
 
 export interface GiftFormData {
   boxNumber: number
@@ -17,51 +17,28 @@ export interface GiftFormData {
   note?: string
 }
 
-// Removed ProgressData and related book progress APIs
-
-// Mock API responses for development
-const isDevelopment = process.env.NODE_ENV === 'development'
-
 export const api = {
-  // Submit gift selection
+  // Submit gift selection to Firebase
   async submitGiftSelection(data: GiftFormData): Promise<{ success: boolean; message: string }> {
-    if (isDevelopment) {
-      // Mock response for development
-      console.log('Mock API: Submitting gift selection', data)
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            success: true,
-            message: 'Gift selection submitted successfully (mock)'
-          })
-        }, 1000)
-      })
-    }
-
     try {
-      const response = await fetch(`${API_BASE_URL}/github-issue-proxy`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          event_type: 'create_issue',
-          client_payload: data
-        })
+      const deviceId = getOrCreateDeviceId()
+      
+      await addDoc(collection(db, 'giftSubmissions'), {
+        deviceId,
+        ...data,
+        submittedAt: serverTimestamp(),
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+      console.log('✅ Gift selection saved to Firebase:', data)
+      return {
+        success: true,
+        message: 'Gift selection submitted successfully!'
       }
-
-      return await response.json()
     } catch (error) {
-      console.error('Error submitting gift selection:', error)
+      console.error('❌ Error submitting gift selection:', error)
       throw error
     }
   },
-
-  // progress APIs removed
 }
 
 export default api
