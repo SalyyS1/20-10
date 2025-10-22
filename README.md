@@ -1,12 +1,9 @@
-# 🎁 20/10 Gift App
-
-Ứng dụng quà tặng đặc biệt cho ngày Phụ Nữ Việt Nam 20/10 với lịch 100 ngày và hộp quà 3D bí mật.
+# 🎁 20/10 Website
 
 ## ✨ Tính năng
 
 - 🎁 **3 hộp quà bí mật:** Gấu bông 🧸, vòng tay 💍, sách 📚
 - 📅 **Lịch 100 ngày:** Timer 24h, mở tuần tự từ ngày 1-100
-- 🔐 **Mật khẩu:** `haphuong`
 - 🔥 **Firebase:** Lưu progress và thông tin quà
 - ✨ **Animations:** Hiệu ứng đẹp, responsive design
 - 🎵 **Audio:** Player tích hợp
@@ -86,32 +83,7 @@ npm run build
 npm run deploy
 ```
 
-## 🎮 Cách sử dụng
 
-1. **Landing Page:** Chào mừng và giới thiệu
-2. **Allay Character:** Nhân vật tặng quà
-3. **Flower Bloom:** Hiệu ứng hoa nở
-4. **Gift Selection:** Chọn 1 trong 3 hộp quà
-5. **Form Input:** Điền thông tin nhận quà
-6. **Calendar:** Lịch 100 ngày với timer 24h
-7. **Unlock:** Mở từng ngày với mật khẩu
-
-## 🔐 Mật khẩu
-
-- **Calendar unlock:** `haphuong`
-
-## 📱 Responsive
-
-- ✅ Desktop (1920x1080+)
-- ✅ Tablet (768x1024)
-- ✅ Mobile (375x667)
-
-## 🎨 Design
-
-- **Colors:** Pink, Purple, Blue gradients
-- **Fonts:** Dancing Script, Poppins
-- **Animations:** Framer Motion, CSS transitions
-- **3D Effects:** Three.js, React Three Fiber
 
 ## 📄 License
 
