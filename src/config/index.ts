@@ -15,6 +15,6 @@ export const LETTERS: string[] = [
   "🌅 Ngày 12: Cũng nên cân nhắc thử á, nếu nó phù hợp với ngành của em học để phát triển công việc về sau thì nên thử. Mất một thời gian đầu nhớ nhà thui rồi về sau sẽ đỡ á.",
   "🌅 Ngày 13: Hôm qua anh shock giải tích ngất lâm sàn nên quên viết T.T (nếu chưa đọc thì em vòng lại ngày 12 đọc nhá). Hà nội sang thu rồi đẹp lắm luôn mà máy ảnh hỏng với kẹt lịch thi dài dài, troi oi tiếc lắm luôn. Chắc em cũng gần hết chuyến ''du học'' xa nhà rùi heee, fighting!!! a a a cho anh lập chuỗi tiktok với em nhó >.<",
   "🌅 Ngày 14: Anh chắc mà =)))) Mà đi dài vậy á hả anh cứ tưởng đi có 2 tuần thôi chứ. Đi xa mà dài z thì giữ sức khỏe cẩn thận nhá, hôm nào mất ngủ thì kêu anh anh hát bài chúc bé ngủ ngon cho nghe chắc là sẽ vui hoặc tỉnh hẳn =)))))",
-  "🌠 Ngày 15: Mấy hôm nayy em sao rùi có gì vui có thể chia sẻ với anhh không? Bên anh dạo này lạnh quá trời, sắp vào đông rồii"
- 
+  "🌠 Ngày 15: Mấy hôm nayy em sao rùi có gì vui có thể chia sẻ với anhh không? Bên anh dạo này lạnh quá trời, sắp vào đông rồii",
+  "🌠 Ngày 16: Uay nghe dự báo thì bên em có ảnh hưởng của bão nhỉ, ưu tiên bảo vệ sức khỏe và bản thân nhá. Anh không biết có thể làm được gì không nhma nếu cần giúp gì thì đừng ngại nói với anh nhé "
 ];
